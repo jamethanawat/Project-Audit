@@ -994,7 +994,4 @@ function createCalendar() {
             //console.log(moment(info.start).format('YYYY-MM-DD HH:mm'));
         },
     });
-
-
-
 }
