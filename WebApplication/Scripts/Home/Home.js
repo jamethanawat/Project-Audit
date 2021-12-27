@@ -891,16 +891,13 @@ function createCalendar() {
             dateEnd.setDate(dateEnd.getDate() - 1);
             var dateStart = new Date(startDate);
 
-
             //var newEndDate = dateEnd.getFullYear() + '-' + String(dateEnd.getMonth() + 1).padStart(2, '0') + '-' + String(dateEnd.getDate()).padStart(2, '0');
             var newEndDate = String(dateEnd.getDate()).padStart(2, '0') + '/' + String(dateEnd.getMonth() + 1).padStart(2, '0') + '/' + dateEnd.getFullYear();
             var newStartDate = String(dateStart.getDate()).padStart(2, '0')+ '/' + String(dateStart.getMonth() + 1).padStart(2, '0') + '/' +  dateStart.getFullYear();
 
-
             $('#Date_Start').val(newStartDate + " 08:00")
             $('#Date_End').val(newEndDate + " 17:00")
 
-        
             clearform();
             $('#model_add').modal('show');
         },
@@ -910,7 +907,7 @@ function createCalendar() {
             //console.log(moment(calEvent.end));
       
             //console.log(moment(calEvent.start).format('DD/MM/YYYY HH:mm'));
-          //  console.log(moment(calEvent.end).format('DD/MM/YYYY HH:mm'));
+            //console.log(moment(calEvent.end).format('DD/MM/YYYY HH:mm'));
 
             //console.log(moment(calEvent.start).zone(+0).format('DD/MM/YYYY HH:mm'),"0");
             //console.log(moment(calEvent.start).zone(-7).format('DD/MM/YYYY HH:mm'),"-7");
