@@ -1,0 +1,472 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Plugins css -->
+<!-- DataTables -->
+<link href="~/Content/tmp/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tmp/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!-- Responsive datatable examples -->
+<link href="~/Content/tmp/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/tmp/assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
+<style>
+       html, body {
+            overflow: visible;
+       }
+    .no-scroll {
+    overflow-y: hidden !important;
+    }
+    .hidden {
+        display: none;
+    }
+    /**/
+       .card-footer:last-child {
+        border-radius: 0 0 calc(.25rem - 0) calc(.25rem - 0);
+    }
+
+    .card-footer {
+        padding: .75rem 1.25rem;
+        background-color: rgba(0,0,0,.03);
+        border-top: 0 solid rgba(0,0,0,.125);
+    }
+
+    .bg-white, .bg-white > a {
+        color: #1f2d3d !important;
+    }
+
+    .bg-white {
+        background-color: #fff !important;
+    }
+
+    .flex-wrap {
+        -ms-flex-wrap: wrap !important;
+        flex-wrap: wrap !important;
+    }
+
+    .align-items-stretch {
+        -ms-flex-align: stretch !important;
+        align-items: stretch !important;
+    }
+
+    .mailbox-attachments {
+        padding-left: 0;
+        list-style: none;
+    }
+
+        .mailbox-attachments li {
+            width: 148px;
+            transition: transform 0.5s !important;
+        }
+
+        .mailbox-attachments li {
+            border: 1px solid #eee;
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            width: 150px;
+        }
+
+    .mailbox-attachments {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .mailbox-attachment-icon {
+        /*color: #666;
+        font-size: 30px;
+        max-height: 132.5px;
+        padding: 15px 5px;
+        text-align: center;*/
+        color: #666;
+        font-size: 35px;
+        max-height: 132.5px;
+        padding: 0px 0px;
+        text-align: center;
+    }
+
+    .mailbox-attachment-icon, .mailbox-attachment-info, .mailbox-attachment-size {
+        display: block;
+    }
+
+    .mailbox-attachment-info {
+        background: #f8f9fa;
+        padding: 8px;
+    }
+
+    .mailbox-attachment-icon, .mailbox-attachment-info, .mailbox-attachment-size {
+        display: block;
+    }
+
+    /**/
+    #heading {
+        text-transform: uppercase;
+        color: #673AB7;
+        font-weight: normal
+    }
+
+    #msform {
+        text-align: center;
+        position: relative;
+        /*margin-top: 20px*/
+    }
+
+        #msform fieldset {
+            background: white;
+            border: 0 none;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0;
+            /*padding-bottom: 20px;*/
+            position: relative
+        }
+
+    .form-card {
+        text-align: left
+    }
+
+    #msform fieldset:not(:first-of-type) {
+        display: none
+    }
+
+    #msform input,
+    #msform textarea {
+        padding: 8px 15px 8px 15px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        /*margin-bottom: 25px;
+        margin-top: 2px;*/
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2C3E50;
+        background-color: #ECEFF1;
+        font-size: 16px;
+        letter-spacing: 1px
+    }
+
+        #msform input:focus,
+        #msform textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #673AB7;
+            outline-width: 0
+        }
+
+    #msform .action-button {
+        width: 100px;
+        background: #673AB7;
+        /*font-weight: bold;*/
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 7px 5px;
+        margin: 5px 0px 5px 5px;
+        float: right
+    }
+
+        #msform .action-button:hover,
+        #msform .action-button:focus {
+            background-color: #311B92
+        }
+
+    #msform .action-button-previous {
+        width: 100px;
+        background: #616161;
+        /*font-weight: bold;*/
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 7px 5px;
+        margin: 5px 5px 5px 0px;
+        float: right
+    }
+
+        #msform .action-button-previous:hover,
+        #msform .action-button-previous:focus {
+            background-color: #000000
+        }
+
+    .card {
+        /*z-index: 0;*/
+        border: none;
+        position: relative
+    }
+
+
+
+    .fs-title {
+        font-size: 20px;
+        color: #673AB7;
+        /*margin-bottom: 15px;*/
+        font-weight: normal;
+        text-align: left
+    }
+
+    .purple-text {
+        color: #673AB7;
+        font-weight: normal
+    }
+
+    .steps {
+        font-size: 20px;
+        color: gray;
+        /*margin-bottom: 10px;*/
+        font-weight: normal;
+        text-align: right
+    }
+
+    .fieldlabels {
+        color: gray;
+        text-align: left
+    }
+
+    #progressbar {
+        /*margin-bottom: 30px;*/
+        overflow: hidden;
+        color: lightgrey
+    }
+
+        #progressbar .active {
+            color: #673AB7
+        }
+
+        #progressbar li {
+            list-style-type: none;
+            font-size: 15px;
+            width: 25%;
+            float: left;
+            position: relative;
+            font-weight: 400
+        }
+
+        #progressbar #pending:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f328"
+        }
+
+        #progressbar #personal:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f007"
+        }
+
+        #progressbar #payment:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f046"
+        }
+
+        #progressbar #confirm:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f14a"
+        }
+
+        #progressbar li:before {
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            display: block;
+            font-size: 20px;
+            color: #ffffff;
+            background: lightgray;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            padding: 2px
+        }
+
+        #progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: lightgray;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1
+        }
+
+        #progressbar li.active:before,
+        #progressbar li.active:after {
+            background: #673AB7
+        }
+
+    .progress {
+        /*height: 20px*/
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        background-color: #673AB7
+    }
+
+    .fit-image {
+        width: 100%;
+        object-fit: cover
+    }
+</style>
+<script>
+    GetHistoryPath = '@Url.Action("GetHistory", "Home")';
+    GetTypeEventPath = '@Url.Action("GetTypeEvent", "Home")';
+    GetCustomerPath = '@Url.Action("GetCustomer", "Home")';
+   Submit_SearchPath = '@Url.Action("Submit_Search", "Home")';
+
+</script>
+<div class="modal fade bd-example-modal-form" id="model_history" style="z-index:99999999 !important ;overflow-y: scroll; max-height:100%;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">History &nbsp;</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <div class="card" id="detail_his">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Form Search</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-6 col-6">
+                                <div class="form-group  row">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Customer :</label>
+                                    <div class="col-sm-6 col-md-6 input-group">
+                                        <input class="form-control" type="text" id="customer">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Remark:</label>
+                                    <div class="col-sm-6 col-md-6 input-group">
+                                        <input class="form-control" type="text" id="remark">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-bottom: 0rem;">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Type Event:</label>
+                                    <div class="col-sm-6 col-md-6">
+                                        <select class="custom-select" id="type" name="type">
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Status</label>
+                                    <div class="col-sm-6 col-md-6">
+                          
+                                        <select class="custom-select" id="S_status" name="type"> 
+                                         <option value="-1">Select Type Status</option>
+                                        <option value="1">Finish</option>
+                                        <option value="0">Waiting</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Date Start</label>
+                                    <div class="col-sm-6 col-md-6 input-group">
+                                        <input class="form-control" type="text" id="Date_Start">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-bottom: 0rem;">
+                                    <label for="example-text-input" class="col-sm-2 col-md-3 col-form-label">Date End</label>
+                                    <div class="col-sm-6 col-md-6 input-group">
+                                        <input class="form-control" type="text" id="Date_End">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class=" d-flex flex-row-reverse">
+                                    <div style="justify-content: flex-end !important">
+                                        <button type="submit" id="submit" class="btn btn-raised btn-primary ml-2">Search</button>
+                                        <button type="button" id="clear"class="btn btn-raised btn-danger" data-dismiss="modal">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+    </div><!-- container -->
+
+    <div class="table-responsive">
+        <table id="datatable" class="table table-bordered table-hover txtcenter"style="font-size:13px" width="100%">
+            <thead>
+                <tr>
+
+                    <th >Customers</th>
+                    <th >Address</th>
+                    <th >Type</th>          
+                    <th >Step</th>
+                    <th >Status</th>  
+                    <th >Start</th>
+                    <th >End</th>
+                    <th >More</th>
+
+                </tr>
+            </thead>         
+                <tbody id="tbody1">
+                </tbody>      
+        </table>
+    </div>
+
+</div> <!-- Page content Wrapper -->
+<!-- Plugins js -->
+<script src="~/Content/tmp/assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<!-- Required datatable js -->
+<script src="~/Content/tmp/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/tmp/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src='~/Scripts/Home/Search.js'></script>

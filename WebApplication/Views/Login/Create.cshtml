@@ -1,0 +1,158 @@
+﻿
+@{
+    Layout = "";
+    ViewBag.Title = "Create account";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="themesdesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="~/Content/tmp/assets/images/favicon.ico">
+
+    <link href="~/Content/tmp/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Plugins css -->
+    <link href="~/Content/tmp/assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .select2-container .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-selection--single {
+            background: #fafafa;
+            color: rgb(255 255 255);
+            height: 38px;
+            outline: 0;
+            border: 1px solid rgba(170, 170, 170, 0.3);
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            margin-top: 7px;
+            background-color: rgb(235 205 61);
+        }
+    </style>
+</head>
+
+
+<body class="fixed-left">
+    <!-- Begin page -->
+    <!--<div class="accountbg"></div>-->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div class="wrapper-page">
+
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="text-center">Create account</h3>
+
+                <div class="p-3">
+                    @using (Html.BeginForm("Submit_Create", "Login", FormMethod.Post))
+                    {
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text" required="" name="user" placeholder="Username" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="password" required="" name="pass" placeholder="Password" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text" required="" name="name" placeholder="Name" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="email" required="" name="email" placeholder="Email" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <select class="select2 mb-3 select2-multiple" style="width: 100%" name="skill" multiple="multiple" data-placeholder="   Skill">
+                                    <optgroup label="Select Skill">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <input class="form-control" type="text" required="" name="tel" placeholder="Tel" autocomplete="off">
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="text" name="line" placeholder="Line" autocomplete="off">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <select class="form-control" name="position" style="width: 100%">
+
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center row m-t-20">
+                            <div class="col-12">
+                                <button class="btn btn-danger btn-block waves-effect waves-light" type="submit">Register</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-t-10 mb-0 row">
+                            <div class="col-12 m-t-20 text-center">
+                                <a href="@Url.Action("Index", "Login")" class="text-muted">Already have account?</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery  -->
+    <script src="~/Content/tmp/assets/js/jquery.min.js"></script>
+    <script src="~/Content/tmp/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/tmp/assets/js/modernizr.min.js"></script>
+    <script src="~/Content/tmp/assets/js/detect.js"></script>
+    <script src="~/Content/tmp/assets/js/fastclick.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.blockUI.js"></script>
+    <script src="~/Content/tmp/assets/js/waves.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.scrollTo.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/tmp/assets/js/app.js"></script>
+
+
+    <!-- Plugins js -->
+  
+    <script src="~/Content/tmp/assets/plugins/select2/select2.min.js"></script>
+
+    <script>
+       $(document).ready(function () {
+            $(".select2").select2({
+            width: '100%'
+            });
+        });
+    </script>
+</body>
+</html>

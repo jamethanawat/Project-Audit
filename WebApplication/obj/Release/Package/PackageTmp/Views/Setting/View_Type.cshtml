@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Setting";
+}
+
+<script type="text/javascript">
+    var GetDataTypePath = '@Url.Action("GetDataType", "Setting")';
+    var SaveChangePath = '@Url.Action("SaveChange", "Setting")';
+    var GetDataTypeByIDPath = '@Url.Action("GetDataByID", "Setting")';
+    var DeleteTypeEventPath = '@Url.Action("DeleteTypeEvent", "Setting")';
+    var Positions = @Html.Raw(Json.Encode(ViewBag.Positions));
+
+</script>
+<h2>Type Event</h2>
+
+
+<style>
+    .select-custom {
+        width: 40% !important;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .modal-open {
+        overflow: unset !important;
+    }
+</style>
+
+<!-- DataTables -->
+<link href="~/Content/tmp/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tmp/assets/plugins/colorpicker/asColorPicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tmp/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+
+<div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" id='model' aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalform">Type Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label">Type</label>
+                            <input type="text" class="form-control" id="model_name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Color</label>
+                            <input type="color" class="form-control" id="model_color" value="#3048fd" />
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="card card-info" @*style="box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)*@;">
+                    <div class="card-header" style="background-color: rgb(25 137 155 / 56%);padding: 0.25rem 0.5rem;">
+
+                        <button id="model_add_step" style=" background-color: #22a34a !important;" class="btn btn-primary float-right">
+                            <i class="fas fa-plus"></i>&nbsp;
+                            Add
+                        </button>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center">No</th>
+                                            <th width="85%" style="text-align:center">Step</th>
+                                            <th width="10%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="model_table_step">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-raised btn-danger ml-2 hidden" id="model_delete">Delete Type</button>
+                <button type="button" class="btn btn-raised btn-primary ml-2" id="model_save">Save</button>
+                <button type="button" class="btn btn-raised btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- jquery validation -->
+
+                    <div class="card card-info">
+                        <!-- /.card-header -->
+                        <div >
+                            
+                                <button id="add_type" style="background-color: #22a34a !important;display: flex; justify-content:flex-end" class="btn btn-primary float-right">
+                                    <i class="fas fa-plus"></i>&nbsp;
+                                    New
+                                </button>
+                           
+                        </div>
+                        <div class="card-body table-responsive">
+
+                            <table id="user_tb" class="table table-bordered table-hover txtcenter" width="100%">
+                                <thead>
+                                    <tr>
+
+                                        <th style="text-align:center" width="5%"></th>
+                                        <th style="text-align:center" width="30%">Type</th>
+                                        <th style="text-align:center" width="10%">Color</th>
+                                        <th style="text-align:center" width="35%">Step</th>
+                                        <th style="text-align:center" width="20%">Action</th>
+                                    </tr>
+                                </thead>
+                               
+                                    <tbody id="tbody1">
+                                    </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+<!-- Required datatable js -->
+<script src="~/Content/tmp/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/tmp/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+<!-- colorpicker js -->
+<script src="~/Content/tmp/assets/plugins/colorpicker/jquery-asColor.js"></script>
+<script src="~/Content/tmp/assets/plugins/colorpicker/jquery-asGradient.js"></script>
+<script src="~/Content/tmp/assets/plugins/colorpicker/jquery-asColorPicker.min.js"></script>
+
+<script src="~/Content/tmp/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="~/Content/dataTablestreeGrid.js"></script>
+
+
+
+<script src="~/Scripts/Setting/setting.js"></script>
+
+

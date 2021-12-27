@@ -1,0 +1,337 @@
+﻿
+@{
+    ViewBag.Title = "Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .hidden {
+        display: none;
+        
+    }
+
+
+</style>
+<script>
+    GetCustomerPath = '@Url.Action("GetCustomer", "Home")';
+ 
+</script>
+<div class="">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">               
+                    <h4 class="page-title">Form Elements</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Master Customer</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select" id="customer" name="customer">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <h4 class="mt-0 header-title">I. Basic Information of Client (ข้อมูลลูกค้า)</h4>
+
+                        <br>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Applicant Name <br>ชื่อบริษัท</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="cusname" name="cusname">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Register Address of Client <br>ที่อยู่:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="address" name="address">
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-bottom: 0rem;">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Contact person name <br>ชื่อผู้ติดต่อ:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="contactname" name="contactname">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="contacttel" name="contacttel" placeholder="Tel">
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="contactfax" name="contactfax" placeholder="Fax">
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="email" id="contactemail" name="contactemail" placeholder="E-Mail">
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+                        <h4 class="mt-0 header-title">II Certification Scheme, Type and Scopes Applied for：(ข้อมูลที่ขอการรับรอง)</h4>
+                        <br>
+                        <div class="form-group row">
+                            <div class="col-sm-2"> </div>
+                            <div class="col-md-9">
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio4">New customer (ลูกค้าใหม่)</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio5">Recertification (ต่ออายุ)</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio6">Change (เปลี่ยนแปลง)</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio7">Please specify</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="email" id="contactemail" name="contactemail" placeholder="(โปรดระบุ)">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="form-group row">
+                            <label for="example-email-input" class="col-sm-2 col-form-label">Scheme Applied for<br>มาตรฐานที่ขอการรับรอง</label>
+                            <div class="col-sm-10">
+
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck6" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck6">CODEX GMP v.2003</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck7" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck7">HACCP v.2003</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck8" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck8">CODEX GHPs v.2020</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck9" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck9">HACCP v.2020</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck10" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck10">Accredit by ACFS </label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck11" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck11">มกษ</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="email" id="contactemail" name="contactemail" placeholder="มกษ....">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-10">
+
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck12" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck12"> ISO9001:2015</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck13" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck13"> ISO14001:2015</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck14" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck14">OHSAS18001:2007</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck15" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck15"> ISO45001:2018 </label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck16" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck16"> Accredit by UKAS </label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck17" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                        <label class="custom-control-label" for="customCheck17">Other (อื่นๆ)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="email" id="contactemail" name="contactemail" placeholder=" Other (อื่นๆ)....">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="example-email-input" class="col-sm-2 col-form-label">Surveillance period<br>(รอบการตรวจติดตาม)</label>
+                            <div class="col-sm-10">
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio4">6 months(6 เดือน)</label>
+                                    </div>
+                                </div>
+                                <div class="form-check-inline my-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio5">12 months (12 เดือน)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="example-url-input" class="col-sm-2 col-form-label">Certification Scopes <br> Applied for<br>  Product/Service Scopes<br> (ขอบข่ายธุรกิจ)</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="remark_update" placeholder="" style="margin-top: 0px; margin-bottom: 0px; height: 100px;"></textarea>
+                            </div>
+                        </div>
+
+                        <br>
+                        <h4 class="mt-0 header-title">III Investigation of Basic Status of Organization (ข้อมูลระบบ)</h4>
+                        <br>
+
+                        <div class="form-group row">
+                            <label for="example-password-input" class="col-sm-6 col-form-label">
+                                1.Time of Management System Documents Release & System Operation：(วันที่เริ่มใช้ระบบ)
+                            </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="example-password-input">
+                            </div>
+                        </div>
+             
+                        <div class="form-group row">
+                            <label for="example-password-input" class="col-sm-6 col-form-label">
+                                2.Time of Certification Audit Requested：(วันที่ต้องการตรวจ)
+                            </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" id="example-password-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-password-input" class="col-sm-7 col-form-label">
+                                3.If consultation services were accepted, please indicate name of consultant organization and list of consultant
+                                team members：(ชื่อที่ปรึกษา) ถ้ามี
+                            </label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="example-password-input">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="example-date-input" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-month-input" class="col-sm-2 col-form-label">Month</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="month" value="2011-08" id="example-month-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-week-input" class="col-sm-2 col-form-label">Week</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="week" value="2011-W33" id="example-week-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-time-input" class="col-sm-2 col-form-label">Time</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Select</label>
+                            <div class="col-sm-10">
+                                <select class="form-control">
+                                    <option>Select</option>
+                                    <option>Large select</option>
+                                    <option>Small select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Custom Select</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Large</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" id="example-text-input-lg">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-sm" class="col-sm-2 col-form-label">Small</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="example-text-input-sm">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+    </div><!-- container -->
+
+</div> <!-- Page content Wrapper -->
+<script src='~/Scripts/Report/Report.js'></script>

@@ -1,0 +1,414 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    @*<title>Dashor - Responsive Bootstrap 4 Admin Dashboard</title>*@
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="themesdesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="~/Content/tmp/assets/images/favicon.ico">
+
+    <!--calendar css-->
+    <link href="~/Content/tmp/assets/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet" />
+    @*<link href="~/Content/fullcalendar-5.9.0/lib/main.min.css" rel="stylesheet" />*@
+
+    <link href="~/Content/tmp/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <!--calendar css full calendar scheduler-->
+    @*<link href="~/Content/calendar/scheduler.css" rel="stylesheet" />*@
+
+
+    <!-- full calendar schedule JS -->
+    <script src="~/Content/calendar/lib/moment.min.js"></script>
+    <script src="~/Content/calendar/lib/jquery.min.js"></script>
+    <script src="~/Content/calendar/lib/fullcalendar.min.js"></script>
+    <script src="~/Content/calendar/scheduler.min.js"></script>
+
+
+    <!--sweetAlert css -->
+    <link href="~/Content/sweetAlert/sweetalert.css" rel="stylesheet" />
+
+
+    <script type="text/javascript">
+        var file_list = [];
+
+    </script>
+
+    <style>
+        .customicon {
+            font-size: 1.5em !important;
+            color: #ffffff !important;
+        }
+
+        [data-filepond-item-state='idle'] .filepond--item-panel {
+            background-color: #22a061;
+        }
+
+
+
+        /*<!--loading -->*/
+        .spinner2 {
+            margin: 30px auto;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+            .spinner2 > div {
+                background-color: #5ac5d8b5;
+                height: 100%;
+                width: 6px;
+                display: inline-block;
+                -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+                animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            }
+
+            .spinner2 .rect2 {
+                -webkit-animation-delay: -1.1s;
+                animation-delay: -1.1s;
+            }
+
+            .spinner2 .rect3 {
+                -webkit-animation-delay: -1.0s;
+                animation-delay: -1.0s;
+            }
+
+            .spinner2 .rect4 {
+                -webkit-animation-delay: -0.9s;
+                animation-delay: -0.9s;
+            }
+
+            .spinner2 .rect5 {
+                -webkit-animation-delay: -0.8s;
+                animation-delay: -0.8s;
+            }
+
+        @@-webkit-keyframes sk-stretchdelay {
+            0%, 40%, 100% {
+                -webkit-transform: scaleY(0.4)
+            }
+
+            20% {
+                -webkit-transform: scaleY(1.0)
+            }
+        }
+
+        @@keyframes sk-stretchdelay {
+            0%, 40%, 100% {
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }
+
+            20% {
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+    </style>
+    @*@Scripts.Render("~/bundles/filepond")*@
+</head>
+
+
+<body class="fixed-left">
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left">
+                <i class="ion-close"></i>
+            </button>
+
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <div class="text-center">
+                    <!--<a href="index.html" class="logo"><i class="fa fa-paw"></i> Aplomb</a>-->
+                    @*<h4 class="logo">@Session["name"]</h4>*@
+                    @*<a  class="logo"><img src="~/Content/tmp/assets/images/logo.png" height="14" alt="logo"></a>*@
+                    <a class="logo">
+                        <img src="~/Content/logo.png" height="60" alt="logo">
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="sidebar-inner slimscrollleft" id="sidebar-main">
+
+                <div id="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">Menu</li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Home")" id="menu-1" class="waves-effect waves-light active"><i class="mdi mdi-calendar-clock"></i><span> Calendar </span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Search", "Home")" id="menu-2" class="waves-effect waves-light active"><i class="fas fa-search"></i><span> Search </span></a>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" id="menu-3" class="waves-effect waves-light"><i class="mdi mdi-table"></i><span> Document </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="@Url.Action("Request", "Report")">Requisitions</a></li>
+                                <li><a href="tables-datatable.html">ใบเสนอราคา</a></li>
+                            
+                            </ul>
+                        </li>
+
+                        @if (Session["user"] is null)
+                        {
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" id="menu-4" class="waves-effect waves-light"><i class="mdi mdi-settings"></i><span> Setting </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="@Url.Action("View_Type", "Setting")" id="menu-7" class="waves-effect waves-light active"><i class="mdi mdi-calendar-clock"></i><span> Type Event</span></a>
+                                    </li>
+                                    @*<li><a href="tables-datatable.html">Data Table</a></li>
+                                    <li><a href="tables-responsive.html">Responsive Table</a></li>
+                                    <li><a href="tables-editable.html">Editable Table</a></li>*@
+                                </ul>
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div> <!-- end sidebarinner -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Start right Content here -->
+
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+                <!-- Top Bar Start -->
+                <div class="topbar">
+                    <nav class="navbar-custom">
+                        <ul class="list-inline float-right mb-0">
+                            <!--<li class="list-inline-item dropdown notification-list">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <i class="ti-email noti-icon"></i>
+                                    <span class="badge badge-danger noti-icon-badge">5</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">-->
+                            <!-- item-->
+                            <!--<div class="dropdown-item noti-title">
+                                <h5><span class="badge badge-danger float-right">5</span>Messages</h5>
+                            </div>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon"><img src="~/Content/tmp/assets/images/users/avatar-2.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
+                                <p class="notify-details"><b>Charles M. Jones</b><small class="">Dummy text of the printing and typesetting industry.</small></p>
+                            </a>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon"><img src="~/Content/tmp/assets/images/users/avatar-3.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
+                                <p class="notify-details"><b>Thomas J. Mimms</b><small class="">You have 87 unread messages</small></p>
+                            </a>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon"><img src="~/Content/tmp/assets/images/users/avatar-4.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
+                                <p class="notify-details"><b>Luis M. Konrad</b><small class="">It is a long established fact that a reader will</small></p>
+                            </a>
+                            <div class="dropdown-divider"></div>-->
+                            <!-- All-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        View All
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="list-inline-item dropdown notification-list">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <i class="ti-bell noti-icon"></i>
+                                    <span class="badge badge-success noti-icon-badge">9</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">-->
+                            <!-- item-->
+                            <!--<div class="dropdown-item noti-title">
+                                <h5><span class="badge badge-success float-right">9</span>Notification</h5>
+                            </div>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
+                                <p class="notify-details"><b>Your order is placed</b><small class="">Dummy text of the printing and typesetting industry.</small></p>
+                            </a>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-success"><i class="mdi mdi-message"></i></div>
+                                <p class="notify-details"><b>New Message received</b><small class="">You have 87 unread messages</small></p>
+                            </a>-->
+                            <!-- item-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-warning"><i class="mdi mdi-martini"></i></div>
+                                <p class="notify-details"><b>Your item is shipped</b><small class="">It is a long established fact that a reader will</small></p>
+                            </a>
+                            <div class="dropdown-divider"></div>-->
+                            <!-- All-->
+                            <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        View All
+                                    </a>
+                                </div>
+                            </li>-->
+
+                            <li class="list-inline-item dropdown notification-list">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <i class="fas fa-user-secret fa-lg customicon"></i>
+                                    @*<img src="~/Content/tmp/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">*@
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                    <!-- item-->
+                                    <div class="dropdown-item noti-title">
+                                        <h5>Welcome</h5>
+                                    </div>
+                                    @*<a class="dropdown-item" href="#"><i class="mdi mdi-account-circle "></i> Profile</a>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-wallet "></i> My Wallet</a>
+                                        <a class="dropdown-item" href="#"><span class="badge badge-primary float-right">3</span><i class="mdi mdi-settings "></i> Settings</a>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline"></i> Lock screen</a>*@
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="@Url.Action("Index", "Login")"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="float-left">
+                                <button class="button-menu-mobile open-left waves-light waves-effect">
+                                    <i class="mdi mdi-menu"></i>
+                                </button>
+                            </li>
+                            @*<li class="hide-phone app-search">
+                                    <form role="search" class="">
+                                        <input type="text" placeholder="Search..." class="form-control">
+                                        <a href=""><i class="fa fa-search"></i></a>
+                                    </form>
+                                </li>*@
+                        </ul>
+                        <div class="clearfix"></div>
+                    </nav>
+                </div>
+                <!-- Top Bar End -->
+
+                <div class="page-content-wrapper">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page-title-box">
+                                    @*<div class="float-right">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-round dropdown-toggle px-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-settings mr-1"></i>Settings
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>*@
+                                    @*<h4 class="page-title">Calendar</h4>*@
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title end breadcrumb -->
+                 
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <div class="loading hidden" id="loading">
+
+                                                <div class="spinner2" style="position:fixed;top:37%;left:50%;z-index:99999999;">
+                                                    <div class="rect1"></div>
+                                                    <div class="rect2"></div>
+                                                    <div class="rect3"></div>
+                                                    <div class="rect4"></div>
+                                                    <div class="rect5"></div>
+                                                </div>
+
+                                                <div style="
+                                                    content: '';
+                                                    display: block;
+                                                    position: fixed;
+                                                    top: 0;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    z-index: 9999999;
+                                                    background-color: rgba(255, 255, 255, 0.762);"></div>
+                                                    
+                                            </div>
+                                              @RenderBody()
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div><!-- container -->
+
+                </div> <!-- Page content Wrapper -->
+
+            </div> <!-- content -->
+
+            <footer class="footer">
+                © 2021 Dashor by Themesdesign.
+            </footer>
+
+        </div>
+        <!-- End Right content here -->
+
+    </div>
+
+    <!-- END wrapper -->
+    <!-- jQuery  -->
+    @*<script src="~/Content/tmp/assets/js/jquery.min.js"></script>*@
+    <script src="~/Content/tmp/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/tmp/assets/js/modernizr.min.js"></script>
+    <script src="~/Content/tmp/assets/js/detect.js"></script>
+    <script src="~/Content/tmp/assets/js/fastclick.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.blockUI.js"></script>
+    <script src="~/Content/tmp/assets/js/waves.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.scrollTo.min.js"></script>
+
+    <!-- Jquery-Ui -->
+    <script src="~/Content/tmp/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    @*<script src="~/Content/tmp/assets/plugins/moment/moment.js"></script>*@
+    @*<script src='~/Content/tmp/assets/plugins/fullcalendar/js/fullcalendar.min.js'></script>*@
+    @*event calendar*@
+    @*<script src="~/Content/tmp/assets/pages/calendar-init.js"></script>*@
+
+    <!-- App js -->
+    <script src="~/Content/tmp/assets/js/app.js"></script>
+
+    @*@Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+
+
+    <!-- sweetAlert JS-->
+    <script src="~/Content/sweetAlert/sweetalert-dev.js"></script>
+    <script src="~/Content/sweetAlert/sweetalert.min.js"></script>
+
+    <script src="~/Content/datapickerJS/bootstrap-datepickerEdit.js"></script>
+</body>
+</html>

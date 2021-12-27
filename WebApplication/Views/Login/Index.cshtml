@@ -1,0 +1,112 @@
+﻿
+@{ 
+    Layout = "";
+     ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Login</title>
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="themesdesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="~/Content/tmp/assets/images/favicon.ico">
+
+    <link href="~/Content/tmp/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tmp/assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <!--sweetAlert css -->
+    <link href="~/Content/sweetAlert/sweetalert.css" rel="stylesheet" />
+
+</head>
+
+
+<body class="fixed-left">
+    <!-- Begin page -->
+    <!--<div class="accountbg"></div>-->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div class="wrapper-page">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center mt-0">
+                    @*<a href="index.html" class="logo logo-admin"><img src="~/Content/tmp/assets/images/logo.png" height="20" alt="logo"></a>*@
+                    <h1 class="text-center">Demo System</h1>
+                </h3>
+                <h6 class="text-center">Sign In</h6>
+                <div class="p-3">
+                    @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
+                    {
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text" name="user" required="" placeholder="Username" autocomplete="on">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="password" id="pass"name="pass" required="" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group text-center row m-t-20">
+                            <div class="col-12">
+                                <button class="btn btn-danger btn-block waves-effect waves-light" id="submit" type="submit">Log In</button>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group m-t-10 mb-0 row">
+                            <div class="col-12 m-t-20 text-center">
+                                <a href="@Url.Action("Create", "Login")" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account ?</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery  -->
+    <script src="~/Content/tmp/assets/js/jquery.min.js"></script>
+    <script src="~/Content/tmp/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/tmp/assets/js/modernizr.min.js"></script>
+    <script src="~/Content/tmp/assets/js/detect.js"></script>
+    <script src="~/Content/tmp/assets/js/fastclick.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.blockUI.js"></script>
+    <script src="~/Content/tmp/assets/js/waves.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/tmp/assets/js/jquery.scrollTo.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/tmp/assets/js/app.js"></script>
+
+    <!-- sweetAlert JS-->
+    <script src="~/Content/sweetAlert/sweetalert-dev.js"></script>
+    <script src="~/Content/sweetAlert/sweetalert.min.js"></script>
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+        $(document).ready(function () {
+            swal("Error", "@TempData["Message"]", "error");
+        });
+        </script>
+        TempData["Message"] = null;
+    }
+    <script>
+        document.getElementById("pass").addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                $("#submit").click();
+            }
+         }); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,767 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script type="text/javascript">
+GetTypeEventPath = '@Url.Action("GetTypeEvent", "Home")';
+InsertFilePath = '@Url.Action("InsertFile", "Home")';
+GetCustomerPath = '@Url.Action("GetCustomer", "Home")';
+CkEventAndStepPath = '@Url.Action("CkEventAndStep", "Home")';
+GetEventPath = '@Url.Action("GetEvent", "Home")';
+GetFilePath = '@Url.Action("GetFile", "Home")';
+InsertEventPath = '@Url.Action("InsertEvent", "Home")';
+UpdateEventPath = '@Url.Action("UpdateEvent", "Home")';
+UpdateStatusEventPath = '@Url.Action("UpdateStatus", "Home")';
+GetHistoryPath = '@Url.Action("GetHistory", "Home")';
+DownloadFilePath = '@Url.Action("DownloadFile", "Home")';
+GetStaffPath = '@Url.Action("GetStaff", "Home")';
+login='@Url.Action("Index", "Login")';
+
+</script>
+<!-- Plugins css -->
+<link href="~/Content/tmp/assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tmp/assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
+<link href="~/Content/filepond/filepond.css?date='@DateTime.Now.ToString("yyMMddHH")'" rel="stylesheet">
+<script src="~/Content/filepond/filepond.min.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+<script src="~/Content/filepond/filepond.jquery.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+<script src="~/Content/filepond/filepond-plugin-file-encode.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+<script src="~/Content/filepond/filepond-plugin-image-preview.min.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+<script src="~/Content/filepond/filepond-plugin-file-validate-size.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+
+<script src="~/Scripts/Shared/FilePond_Home.js?date='@DateTime.Now.ToString("yyMMddHH")'"></script>
+
+<style>
+    html, body {
+    overflow: visible;
+}
+    .no-scroll {
+    overflow-y: hidden !important;
+    }
+    .txtcolor{
+        color: #333333;
+    }
+    .fc-scroller {
+        overflow-x: visible !Important;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+
+    input[type="text"]:disabled {
+        background: #cccccc94;
+    }
+
+    .select2-container .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-selection--single {
+        background: #fafafa;
+        color: rgb(255 255 255);
+        height: 38px;
+        outline: 0;
+        border: 1px solid rgba(170, 170, 170, 0.3);
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        margin-top: 7px;
+        background-color: rgb(235 205 61);
+    }
+
+    .fc-event {
+        border-radius: 2px;
+        border: none;
+        cursor: move;
+        font-size: 11px;
+        margin: 2px 0;
+        padding: 5px 5px;
+        text-align: center;
+        background-color: #59ceb5;
+        color: #ffffff !important;
+    }
+
+    .index:after {
+        width: 20px;
+        height: 20px;
+        margin-left: -11px;
+        background-color: #ffa56a !important;
+        border-color: #7de410 !important;
+    }
+
+    .finish {
+        color: #0ba504 !important;
+    }
+
+    body.modal-open {
+        overflow: hidden;
+        position: fixed;
+    }
+    /*ddddd*/
+    .card-footer:last-child {
+        border-radius: 0 0 calc(.25rem - 0) calc(.25rem - 0);
+    }
+
+    .card-footer {
+        padding: .75rem 1.25rem;
+        background-color: rgba(0,0,0,.03);
+        border-top: 0 solid rgba(0,0,0,.125);
+    }
+
+    .bg-white, .bg-white > a {
+        color: #1f2d3d !important;
+    }
+
+    .bg-white {
+        background-color: #fff !important;
+    }
+
+    .flex-wrap {
+        -ms-flex-wrap: wrap !important;
+        flex-wrap: wrap !important;
+    }
+
+    .align-items-stretch {
+        -ms-flex-align: stretch !important;
+        align-items: stretch !important;
+    }
+
+    .mailbox-attachments {
+        padding-left: 0;
+        list-style: none;
+    }
+
+        .mailbox-attachments li {
+            width: 148px;
+            transition: transform 0.5s !important;
+        }
+
+        .mailbox-attachments li {
+            border: 1px solid #eee;
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            width: 150px;
+        }
+
+    .mailbox-attachments {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .mailbox-attachment-icon {
+        /*color: #666;
+        font-size: 30px;
+        max-height: 132.5px;
+        padding: 15px 5px;
+        text-align: center;*/
+        color: #666;
+        font-size: 35px;
+        max-height: 132.5px;
+        padding: 0px 0px;
+        text-align: center;
+    }
+
+    .mailbox-attachment-icon, .mailbox-attachment-info, .mailbox-attachment-size {
+        display: block;
+    }
+
+    .mailbox-attachment-info {
+        background: #f8f9fa;
+        padding: 8px;
+    }
+
+    .mailbox-attachment-icon, .mailbox-attachment-info, .mailbox-attachment-size {
+        display: block;
+    }
+
+    /*  */
+
+
+    #heading {
+        text-transform: uppercase;
+        color: #673AB7;
+        font-weight: normal
+    }
+
+    #msform {
+        text-align: center;
+        position: relative;
+        /*margin-top: 20px*/
+    }
+
+        #msform fieldset {
+            background: white;
+            border: 0 none;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0;
+            /*padding-bottom: 20px;*/
+            position: relative
+        }
+
+    .form-card {
+        text-align: left
+    }
+
+    #msform fieldset:not(:first-of-type) {
+        display: none
+    }
+
+    #msform input,
+    #msform textarea {
+        padding: 8px 15px 8px 15px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        /*margin-bottom: 25px;
+        margin-top: 2px;*/
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2C3E50;
+        background-color: #ECEFF1;
+        font-size: 16px;
+        letter-spacing: 1px
+    }
+
+        #msform input:focus,
+        #msform textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #673AB7;
+            outline-width: 0
+        }
+
+    #msform .action-button {
+        width: 100px;
+        background: #673AB7;
+        /*font-weight: bold;*/
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 7px 5px;
+        margin: 5px 0px 5px 5px;
+        float: right
+    }
+
+        #msform .action-button:hover,
+        #msform .action-button:focus {
+            background-color: #311B92
+        }
+
+    #msform .action-button-previous {
+        width: 100px;
+        background: #616161;
+        /*font-weight: bold;*/
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 7px 5px;
+        margin: 5px 5px 5px 0px;
+        float: right
+    }
+
+        #msform .action-button-previous:hover,
+        #msform .action-button-previous:focus {
+            background-color: #000000
+        }
+
+    .card {
+        /*z-index: 0;*/
+        border: none;
+        position: relative
+    }
+
+
+
+    .fs-title {
+        font-size: 20px;
+        color: #673AB7;
+        /*margin-bottom: 15px;*/
+        font-weight: normal;
+        text-align: left
+    }
+
+    .purple-text {
+        color: #673AB7;
+        font-weight: normal
+    }
+
+    .steps {
+        font-size: 20px;
+        color: gray;
+        /*margin-bottom: 10px;*/
+        font-weight: normal;
+        text-align: right
+    }
+
+    .fieldlabels {
+        color: gray;
+        text-align: left
+    }
+
+    #progressbar {
+        /*margin-bottom: 30px;*/
+        overflow: hidden;
+        color: lightgrey
+    }
+
+        #progressbar .active {
+            color: #673AB7
+        }
+
+        #progressbar li {
+            list-style-type: none;
+            font-size: 15px;
+            width: 25%;
+            float: left;
+            position: relative;
+            font-weight: 400
+        }
+
+        #progressbar #pending:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f328"
+        }
+
+        #progressbar #personal:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f007"
+        }
+
+        #progressbar #payment:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f046"
+        }
+
+        #progressbar #confirm:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f14a"
+        }
+
+        #progressbar li:before {
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            display: block;
+            font-size: 20px;
+            color: #ffffff;
+            background: lightgray;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            padding: 2px
+        }
+
+        #progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: lightgray;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1
+        }
+
+        #progressbar li.active:before,
+        #progressbar li.active:after {
+            background: #673AB7
+        }
+
+    .progress {
+        /*height: 20px*/
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        background-color: #673AB7
+    }
+
+    .fit-image {
+        width: 100%;
+        object-fit: cover
+    }
+</style>
+
+
+
+<div class="modal fade bd-example-modal-form" id="model_history" style="z-index:99999999 !important ;overflow-y: scroll; max-height:100%;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">History &nbsp;</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0rem;">
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <div class="card" id="detail_his" style="margin-bottom: 0.4rem;">
+
+                                @*<h2 id="heading">Sign Up Your User Account</h2>
+                                    <p>Fill all form field to go to next step</p>
+                                    <form id="msform">
+
+                                        <ul id="progressbar">
+                                            <li class="active" id="pending"><strong>Account</strong></li>
+                                            <li id="personal"><strong>Personal</strong></li>
+                                            <li id="payment"><strong>Image</strong></li>
+                                            <li id="payment"><strong>Image</strong></li>
+                                            <li id="payment"><strong>Image</strong></li>
+                                            <li calss="mdi mdi-calendar-clock" id="confirm"><strong>Finish</strong></li>
+                                        </ul>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <br>
+                                        <fieldset>
+                                            <div class="form-card">
+                                                <div class='row'>
+                                                    <div class='col-7'>
+                                                        <h2 class='fs-title'>Personal Information:</h2>
+                                                    </div>
+                                                    <div class='col-5'>
+                                                        <h2 class='steps'>Step 2 - 4</h2>
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-6'>
+                                                        <div class='form-group'>
+                                                            <label for='Date_End' class='control-label'>DateTime Start</label>
+                                                            <input class='form-control' type='text'  disabled value='12/10/2021 08:00 '>
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-md-6'>
+                                                        <div class='form-group'>
+                                                            <label for='Date_End' class='control-label'>DateTime End</label>
+                                                            <input class='form-control' type='text' >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12'>
+                                                        <div class='form-group no-margin'>
+                                                            <label for='field-7' class='control-label'>Remark</label>
+                                                            <textarea class='form-control'  placeholder='Write something about yourself' style='margin-top: 0px; margin-bottom: 0px; height: 100px;' disabled ></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12'>
+                                                        <div class='form-group '>
+                                                            <label for='inputSkills' class='control-label'>Attach File</label>
+                                                            <div class='form-group row '>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="button" name="next" class="next action-button" value="Submit" />
+                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                        </fieldset>
+
+                                    </form>*@
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-form" id="model_add" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalform">New Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Date_End" class="control-label">DateTime Start</label>
+                            <input class="form-control" type="text" id="Date_Start" name="Date_Start">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Date_End" class="control-label">DateTime End</label>
+                            <input class="form-control" type="text" id="Date_End" name="Date_End">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Type Event</label>
+                            <select class="custom-select" id="type" name="type">
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Customer</label>
+                            <select class="custom-select" id="customer" name="customer">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group no-margin">
+                            <label class="control-label">Remark</label>
+                            <textarea class="form-control" name="remark" id="remark" placeholder="Write something about yourself" style="margin-top: 0px; margin-bottom: 0px; height: 40px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Staff</label>
+                            <select class="select2 mb-3 select2-multiple" style="width: 100%" name="staff" id="staff" multiple="multiple" data-placeholder="   Staff">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group " style=" margin-bottom: 0.1rem;">
+                                <label for="inputSkills" class="col-sm-2 col-form-label">Attach File</label>
+                                <div class="col-md-12">
+                                    @if (true)
+                                    {
+
+                                        <input type="file" id="form1" class="my-pond" name="filepond" />
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="row pb-1 hidden" id="option">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Mode</label>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-8">
+
+                                    <input type="radio" id="mode_new" name="Radio" value="new" class="control-input">
+                                    <label class="control-label" for="Radio">  &nbsp;New</label>
+                                    &nbsp;&nbsp;
+                                    <input type="radio" id="mode_nextstep" name="Radio" value="nextstep" class="control-input">
+                                    <label class="control-label" for="Radio">   &nbsp;Next Step</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">ID Event</label>
+                            <select class="custom-select" id="event_id" name="event_id">
+                            </select>
+
+                        </div>
+                    </div>
+                </div> <!--end row-->
+                <div class="row" id="panal_step">
+
+                    @*<div class="col-lg-12 col-sm-12">
+                            <div class="card" style="margin-left: 15px">
+
+                                    <h5 class="header-title pb-3">
+                                        Workflow
+                                    </h5>
+                                    <div class="tab-pane">
+                                        <div class="timeline-2" id="list_step">
+                                            <div class="time-item">
+                                                <div class="item-info">
+                                                    <div class="text-muted">Step 1</div>
+                                                    <p><strong><a href="#" class="text-primary">Robert Carlile</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="time-item">
+                                                <div class="item-info">
+                                                    <div class="text-muted">Step 1</div>
+                                                    <p><strong><a href="#" class="text-primary">Robert Carlile</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="time-item index">
+                                                <div class="item-info">
+                                                    <div class="text-muted">Step 1</div>
+                                                    <p><strong><a href="#" class="text-primary">Robert Carlile</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="time-item">
+                                                <div class="item-info">
+                                                    <div class="text-muted">Step 1</div>
+                                                    <p><strong><a href="#" class="text-primary">Robert Carlile</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="time-item">
+                                                <div class="item-info">
+                                                    <div class="text-muted">Step 1</div>
+                                                    <p><strong><a href="#" class="text-primary">Robert Carlile</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>*@
+
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submit_event" class="btn btn-raised btn-primary ml-2">Submit</button>
+                <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-form" id="model_update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Update Event &nbsp;</h5>
+
+                <span>
+                    <i id="IsFinish" class="mdi mdi-checkbox-marked-circle font-32 finish hidden"> </i>
+                </span>
+                <h5 id="IsFinish" class="modal-title finish hidden"> Finish</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Date_End" class="control-label">DateTime Start</label>
+                            <input class="form-control" type="text" id="Date_Start_update">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Date_End" class="control-label">DateTime End</label>
+                            <input class="form-control" type="text" id="Date_End_update">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Remark</label>
+                            <textarea class="form-control" id="remark_update" placeholder="Write something about yourself" style="margin-top: 0px; margin-bottom: 0px; height: 80px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group ">
+                            <label for="inputSkills" class="control-label">Attach File</label>
+                            <div id="listFile" class="form-group row ">
+
+                                @*<div class="col-sm-12">
+                                        <div class="card-footer bg-white">
+                                            <ul class="mailbox-attachments d-flex flex-wrap align-items-stretch clearfix">
+
+                                                <li data-toggle="tooltip" data-placement="top" data-html="true" title="file_desc">
+                                                    <span class="mailbox-attachment-icon">
+                                                        <i class="far fa-file"></i>
+                                                    </span>
+                                                    <div class="mailbox-attachment-info">
+                                                        <span class="mailbox-attachment-size clearfix mt-1">
+                                                            <span style="font-size:12px">120 Bytes</span>
+                                                            <button name="itemFile" value="File.Name_Format^File.name1" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+                                    </div>*@
+
+
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <input type="file" id="form1" class="my-pond" name="filepond" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 d-flex flex-row">
+                        <div style="justify-content: flex-start !important">
+                            <button type="button" id="history" style="align-content:start" class="btn btn-raised btn-info ml-2">History</button>
+                        </div>
+                    </div>
+           
+
+                    <div class="col-md-6 d-flex flex-row-reverse">
+                        <div style="justify-content: flex-end !important">
+                            <button type="submit" id="status_update" class="btn btn-raised btn-success ml-2">Finish</button>
+                            <button type="submit" id="detail_update" class="btn btn-raised btn-primary ml-2">Update</button>
+                            <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+             
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*<link href='~/Content/calendar/lib/fullcalendar.min.css' rel='stylesheet' />
+    <script src='~/Content/calendar/lib/fullcalendar.min.js'></script>*@
+<div id='calendar'></div>
+
+<!-- Plugins js -->
+<script src="~/Content/tmp/assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="~/Content/tmp/assets/plugins/select2/select2.min.js"></script>
+<script src='~/Scripts/Home/Home.js'></script>
+
+
+
+
+
